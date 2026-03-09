@@ -1,1 +1,4 @@
-b
+| Name | URL |
+| Shortie | https://shortie.xo.je/linko |
+| Refiled.org | https://shortie.xo.je/linko |
+
