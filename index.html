@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Visa Gift Card — refiled.org</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root {
+  --bg: #090705;
+  --glass: rgba(255,255,255,0.035);
+  --glass-b: rgba(255,255,255,0.07);
+  --glass-h: rgba(255,255,255,0.055);
+  --amber: #f59e0b;
+  --amber-d: #d97706;
+  --amber-p: rgba(245,158,11,0.1);
+  --amber-g: rgba(245,158,11,0.05);
+  --amber-br: rgba(245,158,11,0.22);
+  --text: #f0e6d3;
+  --text-d: #9a8570;
+  --text-m: #453828;
+  --ok: #86efac;
+  --ok-bg: rgba(134,239,172,0.07);
+  --err: #fca5a5;
+  --mono: 'DM Mono', monospace;
+  --serif: 'Instrument Serif', serif;
+  --t: 0.18s cubic-bezier(0.4,0,0.2,1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.orb { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(90px); }
+.o1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(245,158,11,0.2) 0%, transparent 68%); top: -150px; right: -100px; animation: d1 20s ease-in-out infinite alternate; }
+.o2 { width: 360px; height: 360px; background: radial-gradient(circle, rgba(180,90,10,0.13) 0%, transparent 68%); bottom: -90px; left: -50px; animation: d2 25s ease-in-out infinite alternate; }
+@keyframes d1 { to { transform: translate(-30px,35px); } }
+@keyframes d2 { to { transform: translate(25px,-25px); } }
+body::after {
+  content:''; position:fixed; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:1; opacity:0.45;
+}
+
+/* ── CARD ── */
+.card {
+  position:relative; z-index:10;
+  width:100%; max-width:440px;
+  margin:0 18px;
+  background:rgba(13,10,6,0.82);
+  backdrop-filter:blur(28px) saturate(1.5);
+  -webkit-backdrop-filter:blur(28px) saturate(1.5);
+  border:1px solid var(--glass-b);
+  border-radius:20px;
+  box-shadow:0 0 0 1px rgba(245,158,11,0.03),0 28px 72px rgba(0,0,0,0.7),inset 0 1px 0 rgba(255,255,255,0.05);
+  overflow:hidden;
+}
+
+/* ── HEAD ── */
+.head {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 20px 14px;
+  border-bottom:1px solid var(--glass-b);
+}
+.logo { display:flex; align-items:baseline; gap:1px; text-decoration:none; }
+.lw { font-family:var(--serif); font-size:18px; color:var(--text); }
+.ld { font-family:var(--serif); font-size:18px; color:var(--amber); }
+.le { font-family:var(--mono); font-size:9px; color:var(--text-m); letter-spacing:1px; margin-left:2px; padding-bottom:1px; align-self:flex-end; }
+.head-right { display:flex; align-items:center; gap:8px; }
+.badge { display:flex; align-items:center; gap:5px; font-size:9px; color:var(--text-m); letter-spacing:1px; }
+.badge i { font-size:8px; color:var(--amber); }
+.submit-trigger {
+  display:flex; align-items:center; gap:5px;
+  font-size:9px; color:var(--text-m); letter-spacing:0.5px;
+  background:var(--glass); border:1px solid var(--glass-b);
+  border-radius:6px; padding:5px 9px; cursor:pointer;
+  transition:all var(--t); font-family:var(--mono);
+}
+.submit-trigger:hover { border-color:var(--amber-br); color:var(--text-d); }
+.submit-trigger i { font-size:9px; }
+
+/* ── VISA CARD ── */
+.visa-wrap { padding:20px 20px 16px; display:flex; justify-content:center; }
+.visa-card {
+  width:100%; max-width:320px; height:172px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#1a1206 0%,#2d1f08 40%,#1a1206 100%);
+  border:1px solid var(--amber-br);
+  position:relative; overflow:hidden;
+  box-shadow:0 8px 32px rgba(0,0,0,0.6),0 0 0 1px rgba(245,158,11,0.05),inset 0 1px 0 rgba(255,255,255,0.05);
+  padding:20px 22px;
+  display:flex; flex-direction:column; justify-content:space-between;
+}
+.visa-card::before { content:''; position:absolute; top:-60px; right:-60px; width:200px; height:200px; background:radial-gradient(circle,rgba(245,158,11,0.12) 0%,transparent 65%); pointer-events:none; }
+.visa-card::after { content:''; position:absolute; bottom:-40px; left:-40px; width:160px; height:160px; background:radial-gradient(circle,rgba(180,90,10,0.08) 0%,transparent 65%); pointer-events:none; }
+.vc-top { display:flex; align-items:flex-start; justify-content:space-between; position:relative; z-index:1; }
+.vc-chip { width:34px; height:25px; background:linear-gradient(135deg,#c8a84b,#f0d080,#c8a84b); border-radius:5px; border:1px solid rgba(255,220,100,0.4); position:relative; overflow:hidden; }
+.vc-chip::before { content:''; position:absolute; top:50%; left:0; right:0; height:1px; background:rgba(0,0,0,0.3); transform:translateY(-50%); }
+.vc-chip::after { content:''; position:absolute; left:50%; top:0; bottom:0; width:1px; background:rgba(0,0,0,0.2); transform:translateX(-50%); }
+.vc-brand { font-family:var(--serif); font-size:10px; color:rgba(245,158,11,0.7); letter-spacing:1px; text-transform:uppercase; }
+.vc-number { font-family:var(--mono); font-size:13px; color:rgba(240,230,211,0.9); letter-spacing:3px; position:relative; z-index:1; text-align:center; transition:all 0.4s ease; }
+.vc-bottom { display:flex; align-items:flex-end; justify-content:space-between; position:relative; z-index:1; }
+.vc-label { font-size:7px; color:var(--text-m); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:2px; }
+.vc-val { font-family:var(--mono); font-size:11px; color:var(--text-d); letter-spacing:1px; }
+.visa-logo { font-family:var(--serif); font-size:20px; font-style:italic; color:rgba(240,230,211,0.9); letter-spacing:-1px; }
+
+/* ── BODY ── */
+.body { padding:0 18px 18px; }
+.stats-row { display:flex; gap:7px; margin-bottom:14px; }
+.stat { flex:1; background:var(--glass); border:1px solid var(--glass-b); border-radius:9px; padding:9px; text-align:center; }
+.stat-val { font-size:17px; font-weight:500; color:var(--amber); font-family:var(--serif); }
+.stat-lbl { font-size:8px; color:var(--text-m); letter-spacing:1px; margin-top:2px; }
+
+.rules { display:flex; flex-direction:column; gap:5px; margin-bottom:14px; }
+.rule { display:flex; align-items:center; gap:8px; font-size:10px; color:var(--text-d); padding:6px 10px; background:var(--glass); border:1px solid var(--glass-b); border-radius:7px; }
+.rule i { font-size:10px; color:var(--amber); width:13px; text-align:center; flex-shrink:0; }
+
+.claim-btn {
+  width:100%; background:var(--amber); color:#0a0704;
+  font-family:var(--mono); font-weight:500; font-size:12px;
+  padding:13px; border-radius:10px; border:none; cursor:pointer;
+  transition:all var(--t); letter-spacing:1px;
+  display:flex; align-items:center; justify-content:center; gap:7px;
+  position:relative; overflow:hidden;
+}
+.claim-btn::before { content:''; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent); transform:translateX(-100%); transition:transform 0.5s ease; }
+.claim-btn:hover::before { transform:translateX(100%); }
+.claim-btn:hover:not(:disabled) { background:#fbbf24; box-shadow:0 4px 20px rgba(245,158,11,0.35); transform:translateY(-1px); }
+.claim-btn:disabled { opacity:0.45; cursor:not-allowed; transform:none; }
+.claim-btn i { font-size:11px; }
+
+.result { display:none; margin-top:12px; border-radius:9px; padding:12px 14px; font-size:11px; letter-spacing:0.3px; line-height:1.7; animation:fadeUp 0.3s ease; }
+.result.show { display:block; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+.result.ok { background:var(--ok-bg); border:1px solid rgba(134,239,172,0.2); color:var(--ok); }
+.result.err { background:rgba(252,165,165,0.07); border:1px solid rgba(252,165,165,0.2); color:var(--err); }
+.result.warn { background:var(--amber-p); border:1px solid var(--amber-br); color:var(--amber); }
+.result-head { display:flex; align-items:center; gap:7px; font-weight:500; margin-bottom:6px; font-size:11px; }
+.result-head i { font-size:11px; }
+
+.code-box { background:rgba(0,0,0,0.3); border:1px solid rgba(134,239,172,0.15); border-radius:7px; padding:9px 12px; margin-top:7px; display:flex; align-items:center; justify-content:space-between; gap:9px; }
+.code-val { font-family:var(--mono); font-size:15px; letter-spacing:3px; color:var(--text); font-weight:500; }
+.copy-btn { background:rgba(134,239,172,0.1); border:1px solid rgba(134,239,172,0.2); border-radius:5px; color:var(--ok); font-size:9px; padding:4px 9px; cursor:pointer; font-family:var(--mono); transition:all var(--t); display:flex; align-items:center; gap:4px; flex-shrink:0; }
+.copy-btn:hover { background:rgba(134,239,172,0.18); }
+
+.timer-row { display:flex; align-items:center; gap:6px; font-size:9px; color:var(--text-m); margin-top:8px; }
+.timer-row i { font-size:8px; }
+#countdown { color:var(--amber); }
+.cooldown-bar { height:2px; background:var(--glass-b); border-radius:2px; overflow:hidden; flex:1; }
+.cooldown-fill { height:100%; background:linear-gradient(90deg,var(--amber-d),var(--amber)); border-radius:2px; transition:width 1s linear; }
+
+/* ── FOOT ── */
+.foot { padding:10px 18px; border-top:1px solid var(--glass-b); display:flex; align-items:center; justify-content:space-between; }
+.foot-note { font-size:9px; color:var(--text-m); letter-spacing:0.3px; }
+.foot-note i { margin-right:3px; }
+
+/* ── PROGRESS ── */
+.prog { height:2px; background:var(--glass-b); border-radius:2px; overflow:hidden; margin:0 18px 14px; display:none; }
+.prog.on { display:block; }
+.progf { height:100%; background:linear-gradient(90deg,var(--amber-d),var(--amber)); border-radius:2px; transition:width 0.3s ease; width:0%; box-shadow:0 0 6px rgba(245,158,11,0.4); }
+
+/* ── BLOCKED OVERLAY ── */
+.blocked-overlay {
+  position:absolute; inset:0;
+  background:rgba(9,7,5,0.94); backdrop-filter:blur(10px);
+  z-index:20; display:none;
+  align-items:center; justify-content:center; flex-direction:column;
+  gap:10px; text-align:center; padding:24px; border-radius:20px;
+}
+.blocked-overlay.show { display:flex; }
+.blocked-overlay i { font-size:26px; color:var(--err); }
+.blocked-overlay h3 { font-family:var(--serif); font-size:20px; color:var(--text); }
+.blocked-overlay p { font-size:11px; color:var(--text-d); line-height:1.7; max-width:280px; }
+
+/* ── MODAL BASE ── */
+.modal-bg {
+  position:fixed; inset:0;
+  background:rgba(0,0,0,0.7); backdrop-filter:blur(8px);
+  z-index:100; display:none;
+  align-items:center; justify-content:center;
+  padding:18px;
+  animation:fadeIn 0.2s ease;
+}
+.modal-bg.show { display:flex; }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+.modal {
+  width:100%; max-width:400px;
+  background:rgba(13,10,6,0.96);
+  border:1px solid var(--glass-b);
+  border-radius:18px;
+  box-shadow:0 24px 64px rgba(0,0,0,0.8),inset 0 1px 0 rgba(255,255,255,0.05);
+  overflow:hidden;
+  animation:slideUp 0.25s ease;
+}
+@keyframes slideUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+.modal-head {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 20px 14px;
+  border-bottom:1px solid var(--glass-b);
+}
+.modal-title { font-family:var(--serif); font-size:17px; color:var(--text); }
+.modal-close { background:none; border:none; color:var(--text-m); font-size:14px; cursor:pointer; transition:color var(--t); padding:2px 6px; }
+.modal-close:hover { color:var(--err); }
+
+.modal-body { padding:18px 20px; }
+
+/* ── ADMIN MODAL ── */
+.admin-desc { font-size:10px; color:var(--text-m); margin-bottom:14px; letter-spacing:0.3px; line-height:1.7; }
+
+.field-wrap { margin-bottom:12px; }
+.field-label { font-size:9px; color:var(--text-m); letter-spacing:1px; text-transform:uppercase; margin-bottom:5px; display:block; }
+.field-input {
+  width:100%; background:rgba(0,0,0,0.4); border:1px solid var(--glass-b);
+  border-radius:8px; color:var(--text); font-family:var(--mono); font-size:13px;
+  padding:10px 14px; outline:none; transition:border-color var(--t);
+  letter-spacing:3px; text-align:center;
+}
+.field-input:focus { border-color:var(--amber-br); }
+.field-input.err-input { border-color:rgba(252,165,165,0.4); }
+
+.modal-err { font-size:10px; color:var(--err); margin-top:8px; display:none; }
+.modal-err.show { display:block; }
+
+.modal-btn {
+  width:100%; background:var(--amber); color:#0a0704;
+  font-family:var(--mono); font-weight:500; font-size:12px;
+  padding:12px; border-radius:9px; border:none; cursor:pointer;
+  transition:all var(--t); letter-spacing:1px; margin-top:4px;
+  display:flex; align-items:center; justify-content:center; gap:7px;
+}
+.modal-btn:hover { background:#fbbf24; box-shadow:0 4px 18px rgba(245,158,11,0.3); }
+.modal-btn:disabled { opacity:0.45; cursor:not-allowed; }
+.modal-btn i { font-size:10px; }
+
+/* ── SUBMIT MODAL ── */
+.submit-field {
+  width:100%; background:rgba(0,0,0,0.4); border:1px solid var(--glass-b);
+  border-radius:8px; color:var(--text); font-family:var(--mono); font-size:12px;
+  padding:9px 12px; outline:none; transition:border-color var(--t);
+}
+.submit-field:focus { border-color:var(--amber-br); }
+.submit-field.invalid { border-color:rgba(252,165,165,0.4); }
+.submit-field.valid { border-color:rgba(134,239,172,0.3); }
+
+.field-row { display:flex; gap:8px; }
+.field-row .field-wrap { flex:1; }
+
+.validation-msg { font-size:9px; margin-top:4px; display:none; }
+.validation-msg.show { display:block; }
+.validation-msg.ok { color:var(--ok); }
+.validation-msg.bad { color:var(--err); }
+
+.submit-note { font-size:9px; color:var(--text-m); margin-top:10px; line-height:1.6; padding:8px 10px; background:var(--glass); border-radius:6px; border:1px solid var(--glass-b); }
+.submit-note i { color:var(--amber); margin-right:4px; }
+
+.spin { animation:spin 0.8s linear infinite; }
+@keyframes spin { to{transform:rotate(360deg)} }
+</style>
+</head>
+<body>
+
+<div class="orb o1"></div>
+<div class="orb o2"></div>
+
+<!-- ── ADMIN MODAL ── -->
+<div class="modal-bg" id="adminModal">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">Admin Access</span>
+      <button class="modal-close" onclick="closeModal('adminModal')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <p class="admin-desc">Enter admin code to bypass all restrictions and claim any available card.</p>
+      <div class="field-wrap">
+        <label class="field-label">Access Code</label>
+        <input class="field-input" id="adminCodeInput" type="password" placeholder="••••" maxlength="12"
+          onkeydown="if(event.key==='Enter')verifyAdmin()">
+      </div>
+      <div class="modal-err" id="adminErr"><i class="fa-solid fa-circle-xmark"></i> <span id="adminErrMsg">Invalid code.</span></div>
+      <button class="modal-btn" id="adminSubmitBtn" onclick="verifyAdmin()">
+        <i class="fa-solid fa-unlock" id="adminBtnIcon"></i>
+        <span id="adminBtnText">Verify & Claim</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── SUBMIT MODAL ── -->
+<div class="modal-bg" id="submitModal">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">Submit a Gift Card</span>
+      <button class="modal-close" onclick="closeModal('submitModal')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="field-row">
+        <div class="field-wrap">
+          <label class="field-label">Card Number</label>
+          <input class="submit-field" id="subCode" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="19"
+            oninput="fmtCardNum(this); validateCard()">
+          <div class="validation-msg" id="vCode"></div>
+        </div>
+      </div>
+      <div class="field-row" style="margin-top:10px">
+        <div class="field-wrap">
+          <label class="field-label">Value ($)</label>
+          <input class="submit-field" id="subValue" placeholder="25.00" type="number" min="1" max="500"
+            oninput="validateCard()">
+          <div class="validation-msg" id="vValue"></div>
+        </div>
+        <div class="field-wrap">
+          <label class="field-label">Expiry</label>
+          <input class="submit-field" id="subExpiry" placeholder="MM/YY" maxlength="5"
+            oninput="fmtExpiry(this); validateCard()">
+          <div class="validation-msg" id="vExpiry"></div>
+        </div>
+      </div>
+      <div class="field-wrap" style="margin-top:10px">
+        <label class="field-label">PIN (if applicable)</label>
+        <input class="submit-field" id="subPin" placeholder="Optional" maxlength="8" type="number">
+      </div>
+      <div class="field-wrap" style="margin-top:10px">
+        <label class="field-label">Your Email (optional — for credit)</label>
+        <input class="submit-field" id="subEmail" placeholder="you@example.com" type="email">
+        <div class="validation-msg" id="vEmail"></div>
+      </div>
+      <div class="submit-note">
+        <i class="fa-solid fa-circle-info"></i>
+        Submitted cards are reviewed before being made available. We verify balance before publishing.
+      </div>
+      <button class="modal-btn" id="submitBtn" onclick="submitCard()" style="margin-top:14px" disabled>
+        <i class="fa-solid fa-paper-plane" id="submitBtnIcon"></i>
+        <span id="submitBtnText">Submit Card</span>
+      </button>
+      <div class="modal-err" id="submitResult" style="margin-top:10px; font-size:10px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MAIN CARD ── -->
+<div class="card">
+
+  <div class="blocked-overlay" id="blockedOverlay">
+    <i class="fa-solid fa-shield-halved"></i>
+    <h3>Access Denied</h3>
+    <p id="blockedMsg">VPN or proxy detected. Please disable it and try again.</p>
+  </div>
+
+  <div class="head">
+    <a class="logo" href="/">
+      <span class="lw">refiled</span><span class="ld">.</span><span class="le">org</span>
+    </a>
+    <div class="head-right">
+      <button class="submit-trigger" onclick="openModal('submitModal')">
+        <i class="fa-solid fa-plus"></i> Submit Card
+      </button>
+      <div class="badge"><i class="fa-solid fa-gift"></i> gift cards</div>
+    </div>
+  </div>
+
+  <div class="visa-wrap">
+    <div class="visa-card">
+      <div class="vc-top">
+        <div class="vc-chip"></div>
+        <div class="vc-brand">Prepaid</div>
+      </div>
+      <div class="vc-number" id="cardDisplay">•••• •••• •••• ••••</div>
+      <div class="vc-bottom">
+        <div><div class="vc-label">Value</div><div class="vc-val" id="cardValue">$??</div></div>
+        <div><div class="vc-label">Expires</div><div class="vc-val" id="cardExp">••/••</div></div>
+        <div class="visa-logo">VISA</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="stats-row">
+      <div class="stat"><div class="stat-val" id="availCount">—</div><div class="stat-lbl">AVAILABLE</div></div>
+      <div class="stat"><div class="stat-val" id="claimedCount">—</div><div class="stat-lbl">CLAIMED</div></div>
+      <div class="stat"><div class="stat-val">24h</div><div class="stat-lbl">COOLDOWN</div></div>
+    </div>
+
+    <div class="rules">
+      <div class="rule"><i class="fa-solid fa-circle-check"></i> One card per person every 24 hours</div>
+      <div class="rule"><i class="fa-solid fa-shield-halved"></i> VPN & proxy connections blocked</div>
+      <div class="rule"><i class="fa-solid fa-bolt"></i> Instant delivery — code shown immediately</div>
+    </div>
+
+    <button class="claim-btn" id="claimBtn" onclick="claim()">
+      <i class="fa-solid fa-gift" id="claimIcon"></i>
+      <span id="claimText">Claim Your Gift Card</span>
+    </button>
+
+    <div class="result" id="result">
+      <div class="result-head"><i id="resultIcon"></i><span id="resultTitle"></span></div>
+      <div id="resultBody"></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="foot-note"><i class="fa-solid fa-lock"></i> Secured by Supabase</div>
+    <div class="foot-note">One per IP · 24h limit</div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════
+//  REPLACE WITH YOUR SUPABASE VALUES
+// ══════════════════════════════════════════
+const SUPABASE_URL  = 'https://yavcpdykpwsarvlevylw.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlhdmNwZHlrcHdzYXJ2bGV2eWx3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwODY5MjksImV4cCI6MjA4ODY2MjkyOX0.yDtCHuisMz1PtE7AZIezxR7TT0Papk4gLl1vxMb5tgg';
+// ══════════════════════════════════════════
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+const COOKIE_KEY = 'rfl_gc_last';
+const COOLDOWN   = 24 * 60 * 60 * 1000;
+
+// ── ADMIN KEY COMBO ─────────────────────────────────────
+// Tracks which keys in combo are held
+const combo = { c: false, m: false, s: false, a: false };
+document.addEventListener('keydown', e => {
+  if (e.key === 'Meta' || e.key === 'Control') combo.m = true;
+  if (e.key === 'Shift') combo.s = true;
+  if (e.key === 'a' || e.key === 'A') combo.a = true;
+  if (e.key === 'c' || e.key === 'C') combo.c = true;
+  if (combo.m && combo.s && combo.a && combo.c) {
+    openModal('adminModal');
+    setTimeout(() => document.getElementById('adminCodeInput')?.focus(), 100);
+  }
+});
+document.addEventListener('keyup', e => {
+  if (e.key === 'Meta' || e.key === 'Control') combo.m = false;
+  if (e.key === 'Shift') combo.s = false;
+  if (e.key === 'a' || e.key === 'A') combo.a = false;
+  if (e.key === 'c' || e.key === 'C') combo.c = false;
+});
+
+// ── MODAL HELPERS ────────────────────────────────────────
+function openModal(id) {
+  document.getElementById(id).classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('show');
+  document.body.style.overflow = '';
+  if (id === 'adminModal') {
+    document.getElementById('adminCodeInput').value = '';
+    document.getElementById('adminErr').classList.remove('show');
+    document.getElementById('adminCodeInput').classList.remove('err-input');
+  }
+}
+// Close on backdrop click
+document.querySelectorAll('.modal-bg').forEach(bg => {
+  bg.addEventListener('click', e => { if (e.target === bg) closeModal(bg.id); });
+});
+
+// ── COOKIE HELPERS ───────────────────────────────────────
+function setCookie(k, v, ms) {
+  document.cookie = `${k}=${v}; expires=${new Date(Date.now()+ms).toUTCString()}; path=/; SameSite=Strict`;
+}
+function getCookie(k) {
+  const m = document.cookie.match(new RegExp('(?:^|; )'+k+'=([^;]*)'));
+  return m ? decodeURIComponent(m[1]) : null;
+}
+function getCooldownLeft() {
+  const last = getCookie(COOKIE_KEY);
+  if (!last) return 0;
+  const d = COOLDOWN - (Date.now() - parseInt(last));
+  return d > 0 ? d : 0;
+}
+function fmtTime(ms) {
+  const h = Math.floor(ms/3600000), m = Math.floor((ms%3600000)/60000), s = Math.floor((ms%60000)/1000);
+  return `${h}h ${m}m ${s}s`;
+}
+
+// ── VPN CHECK ────────────────────────────────────────────
+async function checkVPN() {
+  try {
+    const r = await fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(5000) });
+    const d = await r.json();
+    if (d.proxy || d.threat) return { blocked: true, reason: 'VPN or proxy detected.' };
+    if (d.org && /digitalocean|linode|vultr|amazon|google|microsoft|cloudflare|ovh|hetzner|tor/i.test(d.org))
+      return { blocked: true, reason: 'Datacenter IP detected. Use a residential connection.' };
+    return { blocked: false, ip: d.ip };
+  } catch { return { blocked: false, ip: 'unknown' }; }
+}
+
+// ── STATS ────────────────────────────────────────────────
+async function loadStats() {
+  try {
+    const { count: a } = await sb.from('gift_cards').select('*',{count:'exact',head:true}).eq('claimed',false);
+    const { count: c } = await sb.from('gift_cards').select('*',{count:'exact',head:true}).eq('claimed',true);
+    document.getElementById('availCount').textContent = a ?? '—';
+    document.getElementById('claimedCount').textContent = c ?? '—';
+  } catch {}
+}
+
+// ── RESULT HELPER ────────────────────────────────────────
+function showResult(type, title, bodyHTML, icon) {
+  const el = document.getElementById('result');
+  el.className = `result show ${type}`;
+  document.getElementById('resultIcon').className = `fa-solid ${icon}`;
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultBody').innerHTML = bodyHTML;
+}
+
+// ── COUNTDOWN ────────────────────────────────────────────
+let ticker = null;
+function startCountdown() {
+  if (ticker) clearInterval(ticker);
+  ticker = setInterval(() => {
+    const rem = getCooldownLeft();
+    const cd = document.getElementById('countdown');
+    if (cd) cd.textContent = fmtTime(rem);
+    const fill = document.getElementById('cooldownFill');
+    if (fill) fill.style.width = ((COOLDOWN - rem) / COOLDOWN * 100) + '%';
+    if (rem <= 0) {
+      clearInterval(ticker);
+      const btn = document.getElementById('claimBtn');
+      btn.disabled = false;
+      document.getElementById('claimText').textContent = 'Claim Your Gift Card';
+      document.getElementById('claimIcon').className = 'fa-solid fa-gift';
+      document.getElementById('result').className = 'result';
+    }
+  }, 1000);
+}
+
+// ── SHOW COOLDOWN ────────────────────────────────────────
+function showCooldown(rem) {
+  const btn = document.getElementById('claimBtn');
+  btn.disabled = true;
+  document.getElementById('claimIcon').className = 'fa-solid fa-clock';
+  document.getElementById('claimText').textContent = 'On cooldown';
+  showResult('warn', 'Cooldown active', `
+    <span>Come back in:</span>
+    <div class="timer-row" style="margin-top:7px">
+      <i class="fa-solid fa-hourglass-half"></i>
+      <span id="countdown" style="font-size:12px">${fmtTime(rem)}</span>
+      <div class="cooldown-bar"><div class="cooldown-fill" id="cooldownFill" style="width:${(COOLDOWN-rem)/COOLDOWN*100}%"></div></div>
+    </div>`, 'fa-clock');
+  startCountdown();
+}
+
+// ── REVEAL CODE ──────────────────────────────────────────
+function revealCode(data) {
+  document.getElementById('cardDisplay').textContent = data.code.replace(/(.{4})/g,'$1 ').trim();
+  document.getElementById('cardValue').textContent = '$' + (data.value || '??');
+  document.getElementById('cardExp').textContent = data.expiry || '12/26';
+  showResult('ok', 'Card claimed!', `
+    <div class="code-box">
+      <span class="code-val">${data.code}</span>
+      <button class="copy-btn" onclick="copyCode('${data.code}')">
+        <i class="fa-solid fa-copy"></i> Copy
+      </button>
+    </div>
+    <div class="timer-row">
+      <i class="fa-solid fa-clock"></i>
+      Next claim in <span id="countdown">&nbsp;</span>
+      <div class="cooldown-bar"><div class="cooldown-fill" id="cooldownFill" style="width:0%"></div></div>
+    </div>`, 'fa-circle-check');
+}
+
+// ── COPY ─────────────────────────────────────────────────
+function copyCode(code) {
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    if (btn) { btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied'; setTimeout(() => btn.innerHTML = '<i class="fa-solid fa-copy"></i> Copy', 2000); }
+  });
+}
+
+// ── ADMIN VERIFY ─────────────────────────────────────────
+async function verifyAdmin() {
+  const input = document.getElementById('adminCodeInput');
+  const code = input.value.trim();
+  if (!code) return;
+
+  const btn = document.getElementById('adminSubmitBtn');
+  btn.disabled = true;
+  document.getElementById('adminBtnIcon').className = 'fa-solid fa-circle-notch spin';
+  document.getElementById('adminBtnText').textContent = 'Verifying...';
+  document.getElementById('adminErr').classList.remove('show');
+  input.classList.remove('err-input');
+
+  // Verify against Supabase — code never stored in HTML
+  const { data, error } = await sb.rpc('verify_admin_code', { p_code: code });
+
+  if (error || !data || data.valid !== true) {
+    input.classList.add('err-input');
+    document.getElementById('adminErrMsg').textContent = 'Invalid access code.';
+    document.getElementById('adminErr').classList.add('show');
+    btn.disabled = false;
+    document.getElementById('adminBtnIcon').className = 'fa-solid fa-unlock';
+    document.getElementById('adminBtnText').textContent = 'Verify & Claim';
+    return;
+  }
+
+  // Admin verified — claim without restrictions
+  document.getElementById('adminBtnText').textContent = 'Claiming...';
+  const { data: claimData, error: claimErr } = await sb.rpc('admin_claim_gift_card');
+
+  btn.disabled = false;
+  document.getElementById('adminBtnIcon').className = 'fa-solid fa-unlock';
+  document.getElementById('adminBtnText').textContent = 'Verify & Claim';
+
+  if (claimErr || !claimData) {
+    document.getElementById('adminErrMsg').textContent = 'Claim failed. Try again.';
+    document.getElementById('adminErr').classList.add('show');
+    return;
+  }
+
+  if (claimData.status === 'empty') {
+    document.getElementById('adminErrMsg').textContent = 'No cards available to claim.';
+    document.getElementById('adminErr').classList.add('show');
+    return;
+  }
+
+  closeModal('adminModal');
+  revealCode(claimData);
+  document.getElementById('claimBtn').disabled = true;
+  document.getElementById('claimIcon').className = 'fa-solid fa-check';
+  document.getElementById('claimText').textContent = 'Claimed!';
+  loadStats();
+}
+
+// ── MAIN CLAIM ───────────────────────────────────────────
+async function claim() {
+  const btn = document.getElementById('claimBtn');
+  btn.disabled = true;
+  document.getElementById('claimIcon').className = 'fa-solid fa-circle-notch spin';
+  document.getElementById('claimText').textContent = 'Checking eligibility...';
+
+  const rem = getCooldownLeft();
+  if (rem > 0) { showCooldown(rem); return; }
+
+  document.getElementById('claimText').textContent = 'Verifying connection...';
+  const vpn = await checkVPN();
+  if (vpn.blocked) {
+    document.getElementById('blockedMsg').textContent = vpn.reason + ' Disable VPN/proxy and reload.';
+    document.getElementById('blockedOverlay').classList.add('show');
+    btn.disabled = true;
+    return;
+  }
+
+  document.getElementById('claimText').textContent = 'Claiming your card...';
+  const { data, error } = await sb.rpc('claim_gift_card', { p_ip: vpn.ip });
+
+  if (error || !data) {
+    showResult('err','Something went wrong',`<span>${error?.message||'Please try again shortly.'}</span>`,'fa-circle-xmark');
+    btn.disabled = false;
+    document.getElementById('claimIcon').className = 'fa-solid fa-gift';
+    document.getElementById('claimText').textContent = 'Claim Your Gift Card';
+    return;
+  }
+
+  if (data.status === 'cooldown') {
+    const ms = data.ms_remaining || COOLDOWN;
+    setCookie(COOKIE_KEY, Date.now() - (COOLDOWN - ms), COOLDOWN);
+    showCooldown(ms); return;
+  }
+
+  if (data.status === 'empty') {
+    showResult('warn','No cards available','<span>All cards have been claimed. Check back soon.</span>','fa-hourglass-half');
+    btn.disabled = false;
+    document.getElementById('claimIcon').className = 'fa-solid fa-gift';
+    document.getElementById('claimText').textContent = 'Check Again';
+    return;
+  }
+
+  if (data.status === 'ok') {
+    setCookie(COOKIE_KEY, Date.now().toString(), COOLDOWN);
+    revealCode(data);
+    btn.disabled = true;
+    document.getElementById('claimIcon').className = 'fa-solid fa-check';
+    document.getElementById('claimText').textContent = 'Claimed!';
+    startCountdown();
+    loadStats();
+  }
+}
+
+// ── CARD SUBMISSION FORM ─────────────────────────────────
+
+// Auto-format card number as XXXX-XXXX-XXXX-XXXX
+function fmtCardNum(el) {
+  let v = el.value.replace(/\D/g,'').substring(0,16);
+  el.value = v.replace(/(.{4})/g,'$1-').replace(/-$/,'');
+}
+
+// Auto-format expiry as MM/YY
+function fmtExpiry(el) {
+  let v = el.value.replace(/\D/g,'').substring(0,4);
+  if (v.length > 2) v = v.slice(0,2) + '/' + v.slice(2);
+  el.value = v;
+}
+
+function setValidation(id, msgId, ok, msg) {
+  const el = document.getElementById(id);
+  const vm = document.getElementById(msgId);
+  el.classList.toggle('valid', ok);
+  el.classList.toggle('invalid', !ok && msg !== '');
+  vm.className = `validation-msg show ${ok ? 'ok' : 'bad'}`;
+  vm.textContent = msg;
+  if (!msg) { vm.classList.remove('show'); el.classList.remove('valid','invalid'); }
+}
+
+function validateCard() {
+  let allOk = true;
+
+  // Code
+  const code = document.getElementById('subCode').value.replace(/-/g,'');
+  if (code.length === 16 && /^\d+$/.test(code)) {
+    setValidation('subCode','vCode', true, 'Valid format');
+  } else if (code.length > 0) {
+    setValidation('subCode','vCode', false, '16 digits required');
+    allOk = false;
+  } else { setValidation('subCode','vCode', false, ''); allOk = false; }
+
+  // Value
+  const val = parseFloat(document.getElementById('subValue').value);
+  if (!isNaN(val) && val >= 1 && val <= 500) {
+    setValidation('subValue','vValue', true, 'Valid amount');
+  } else if (document.getElementById('subValue').value) {
+    setValidation('subValue','vValue', false, 'Must be $1–$500');
+    allOk = false;
+  } else { setValidation('subValue','vValue', false, ''); allOk = false; }
+
+  // Expiry
+  const exp = document.getElementById('subExpiry').value;
+  const em = exp.match(/^(\d{2})\/(\d{2})$/);
+  if (em) {
+    const month = parseInt(em[1]), year = parseInt('20' + em[2]);
+    const now = new Date();
+    if (month >= 1 && month <= 12 && (year > now.getFullYear() || (year === now.getFullYear() && month >= now.getMonth()+1))) {
+      setValidation('subExpiry','vExpiry', true, 'Valid');
+    } else {
+      setValidation('subExpiry','vExpiry', false, 'Card expired');
+      allOk = false;
+    }
+  } else if (exp) {
+    setValidation('subExpiry','vExpiry', false, 'Format: MM/YY');
+    allOk = false;
+  } else { setValidation('subExpiry','vExpiry', false, ''); allOk = false; }
+
+  // Email (optional)
+  const email = document.getElementById('subEmail').value;
+  if (email) {
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    setValidation('subEmail','vEmail', ok, ok ? 'Valid email' : 'Invalid email');
+    if (!ok) allOk = false;
+  } else { setValidation('subEmail','vEmail', false, ''); }
+
+  document.getElementById('submitBtn').disabled = !allOk;
+  return allOk;
+}
+
+async function submitCard() {
+  if (!validateCard()) return;
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  document.getElementById('submitBtnIcon').className = 'fa-solid fa-circle-notch spin';
+  document.getElementById('submitBtnText').textContent = 'Submitting...';
+
+  const code   = document.getElementById('subCode').value.replace(/-/g,'');
+  const value  = parseFloat(document.getElementById('subValue').value);
+  const expiry = document.getElementById('subExpiry').value;
+  const pin    = document.getElementById('subPin').value || null;
+  const email  = document.getElementById('subEmail').value || null;
+
+  const { error } = await sb.from('card_submissions').insert([{
+    code, value, expiry, pin, submitted_by: email, status: 'pending'
+  }]);
+
+  document.getElementById('submitBtnIcon').className = 'fa-solid fa-paper-plane';
+  document.getElementById('submitBtnText').textContent = 'Submit Card';
+
+  const res = document.getElementById('submitResult');
+  if (error) {
+    res.className = 'modal-err show err';
+    res.style.color = 'var(--err)';
+    res.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> ' + (error.code === '23505' ? 'This card has already been submitted.' : 'Submission failed. Try again.');
+    btn.disabled = false;
+  } else {
+    res.className = 'modal-err show';
+    res.style.color = 'var(--ok)';
+    res.innerHTML = '<i class="fa-solid fa-circle-check"></i> Submitted! We\'ll verify and add it shortly.';
+    // Clear form
+    ['subCode','subValue','subExpiry','subPin','subEmail'].forEach(id => document.getElementById(id).value = '');
+    ['subCode','subValue','subExpiry','subEmail'].forEach(id => {
+      const el = document.getElementById(id); el.classList.remove('valid','invalid');
+    });
+    ['vCode','vValue','vExpiry','vEmail'].forEach(id => document.getElementById(id).classList.remove('show'));
+  }
+}
+
+// ── INIT ─────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  loadStats();
+  const rem = getCooldownLeft();
+  if (rem > 0) showCooldown(rem);
+});
+</script>
+</body>
+</html>
